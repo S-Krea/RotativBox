@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block mainContent %}
+    <div class="row">
+        <div class="pricing-header pb-md-4 mx-auto text-center">
+            <h2 class="display-4 fw-normal">Choisissez votre Rotativ'Box</h2>
+            <p class="fs-5 text-muted">Ici un court descriptif du concept avec un lien vers la page de détail du concept ?</p>
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        <div class="col pricingBox">
+            <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">Box 3</h4>
+                </div>
+                <div class="card-body">
+                    <h2 class="card-title pricing-card-title">3 items</h2>
+                    <a href="{{ path('app_box_chose', {'type' : 3}) }}" class="w-100 btn btn-lg btn-outline-primary">Composer ma box</a>
+                </div>
+            </div>
+        </div>
+        <div class="col pricingBox active">
+            <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                <div class="card-header py-3 border-primary text-bg-primary">
+                    <h4 class="my-0 fw-normal">Box 6</h4>
+                </div>
+                <div class="card-body">
+                    <h2 class="card-title pricing-card-title">6 items</h2>
+                    <a href="{{ path('app_box_chose', {'type': 6}) }}" class="w-100 btn btn-lg btn-primary">Composer ma box</a>
+                </div>
+            </div>
+        </div>
+        <div class="col pricingBox">
+            <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">Box 9</h4>
+                </div>
+                <div class="card-body">
+                    <h2 class="card-title pricing-card-title">9 items</h2>
+                    <a href="{{ path('app_box_chose', {'type' : 9}) }}" class="w-100 btn btn-lg btn-outline-primary">Composer ma box</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
