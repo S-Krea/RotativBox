@@ -15,7 +15,7 @@ class BoxController extends AbstractController
     #[Route(path: '/box/{type}', name: "box_chose", requirements: [
         'type' => '\d+',
     ])]
-    public function listProducts(Request $request, $type,?Box $box = null)
+    public function selectBox(Request $request, $type,?Box $box = null)
     {
         $intType = intval($type);
 
@@ -24,6 +24,6 @@ class BoxController extends AbstractController
             $request->getSession()->set(Box::BOX_SESSION_KEY, $box);
         }
 
-        return $this->render('front/products/list.html.twig', ['box' => $box, 'savedBox' => $box]);
+        return $this->redirectToRoute('app_products_list');
     }
 }

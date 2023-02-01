@@ -93,9 +93,7 @@ class Box
 
     public function removeItem($product)
     {
-        if ($this->items->contains($product)) {
-            $this->items->removeElement($product);
-        }
+        $this->items->removeElement($product);
 
         return $this;
     }

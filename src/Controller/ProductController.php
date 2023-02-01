@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Model\Product;
+use App\Repository\ProductRepository;
 use App\Service\ProductFetcher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -12,27 +14,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductController extends AbstractController
 {
 
-    #[Route(path: '/', name: "_get")]
-    public function getProducts(ProductFetcher $productFetcher, Request $request)
+    #[Route(path: '/', name: "_list")]
+    public function listProducts(ProductRepository $productRepository, Request $request)
     {
-        $content = $request->getContent();
-        $content = json_decode($content);
-        $url = 'products';
-        if ($content) {
-            $url = $content->nextUrl;
-        }
 
-        $productResponse = $productFetcher->fetchProducts($url);
-        $products = $productResponse['products'];
-        $fetchUrl = $productResponse['next'];
+        $products = $productRepository->findAll();
 
-        $html = $this->renderView('front/products/_list.html.twig', ['products' => $products]);
-
-
-        return new JsonResponse([
-            'next' => $fetchUrl,
-            'html' => $html
-        ]);
+        return $this->render('front/products/list.html.twig', ['products' => $products]);
     }
 
 }

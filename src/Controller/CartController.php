@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use App\Exception\BoxFullException;
 use App\Exception\ItemAlreadyInBoxException;
 use App\Model\Box;
@@ -11,8 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CartController extends AbstractController
 {
-    #[Route(path: '/box/add/{productId}', name: 'cart_add')]
-    public function addProduct(Request $request, int $productId, ?Box $box = null)
+    #[Route(path: '/box/add/{id}', name: 'cart_add')]
+    public function addProduct(Request $request, Product $product, ?Box $box = null)
     {
         if (!$box) {
             $this->addFlash('danger', 'Veuillez sélectionner une box pour commencer.');
@@ -21,7 +22,7 @@ class CartController extends AbstractController
         }
 
         try {
-            $box->addItem($productId);
+            $box->addItem($product);
             $this->addFlash('success', 'Produit ajouté à la box');
             $request->getSession()->set(Box::BOX_SESSION_KEY, $box);
         } catch (BoxFullException $boxFullException) {
@@ -34,10 +35,10 @@ class CartController extends AbstractController
     }
 
 
-    #[Route(path: '/box/remove/{productId}', name: 'cart_remove')]
-    public function removeProduct(Request $request, $productId, ?Box $box = null)
+    #[Route(path: '/box/remove/{id}', name: 'cart_remove')]
+    public function removeProduct(Request $request, Product $product, ?Box $box = null)
     {
-        $box->removeItem((int)$productId);
+        $box->removeItem($product);
         $request->getSession()->set(Box::BOX_SESSION_KEY, $box);
 
         return $this->redirectToRoute('app_cart_show');

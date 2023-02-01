@@ -15,9 +15,9 @@
                 <tbody>
                 {% for product in box.items %}
                     <tr>
-                        <td>{{ product }}</td>
+                        <td>{{ product.name }}</td>
                         <td>
-                            <a href="{{ path('app_cart_remove', {'productId': product}) }}">Delete</a>
+                            <a href="{{ path('app_cart_remove', {'id': product.id}) }}">Delete</a>
                         </td>
                     </tr>
                 {% endfor %}

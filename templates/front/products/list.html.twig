@@ -1,51 +1,8 @@
 {% extends "base.html.twig" %}
 
 {% block mainContent %}
-    <div id="products" data-fetch-url="{{ path('app_products_get') }}" class="row row-cols-4 g-3">
-        <div class="loader justify-content-center w-100">
-            <div class="preloader">
-                <div class="box">
-                    <div class="box__inner">
-                        <div class="box__back-flap"></div>
-                        <div class="box__right-flap"></div>
-                        <div class="box__front-flap"></div>
-                        <div class="box__left-flap"></div>
-                        <div class="box__front"></div>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="box__inner">
-                        <div class="box__back-flap"></div>
-                        <div class="box__right-flap"></div>
-                        <div class="box__front-flap"></div>
-                        <div class="box__left-flap"></div>
-                        <div class="box__front"></div>
-                    </div>
-                </div>
-                <div class="line">
-                    <div class="line__inner"></div>
-                </div>
-                <div class="line">
-                    <div class="line__inner"></div>
-                </div>
-                <div class="line">
-                    <div class="line__inner"></div>
-                </div>
-                <div class="line">
-                    <div class="line__inner"></div>
-                </div>
-                <div class="line">
-                    <div class="line__inner"></div>
-                </div>
-                <div class="line">
-                    <div class="line__inner"></div>
-                </div>
-                <div class="line">
-                    <div class="line__inner"></div>
-                </div>
-            </div>
-            <h4 class="text-center">Chargement ...</h4>
-        </div>
+    <div class="row row-cols-4 g-3">
+        {% include 'front/products/_list.html.twig' %}
     </div>
 {% endblock %}
 

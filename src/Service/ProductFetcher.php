@@ -14,7 +14,6 @@ class ProductFetcher
     )
     {
         $this->woocommerceApi = $woocommerceApi;
-
     }
 
     public function fetchProducts($url = 'products', $options = [])
@@ -27,7 +26,7 @@ class ProductFetcher
         $nextLink = $this->findNext($response->getHeaders());
 
         return [
-            'products' => $response->toArray(),
+            'products' => $response->getContent(),
             'next' => $nextLink
         ];
     }

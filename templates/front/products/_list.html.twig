@@ -1,21 +1,16 @@
 {% for product in products %}
     <div class="col" >
         <div class="card">
-            {% set imgAlt = product.name %}
-            {% set img = "https://via.placeholder.com/300x300?text="~(imgAlt|url_encode) %}
-            {% if product.images|length > 0 %}
-                {% set image = product.images|first %}
-                {% set img = image.src %}
-                {% set imgAlt = image.alt %}
-            {% endif %}
-            <img src="{{ img }}" class="card-img-top" alt="{{ imgAlt }}">
+
+            <img src="{{ product.image }}" class="card-img-top" alt="{{ product.imageAlt }}">
             <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
-                <p class="card-text">{{ product.short_description|raw }}</p>
+                <p class="card-text">{{ product.shortDescription|raw }}</p>
+                <p class="fw-bold">Prix de vente : {{ product.price }} €</p>
                 <p>
                     <a href="{{ product.permalink }}" target="_blank" class="text-muted small">Plus d'infos</a>
                 </p>
-                <a href="{{ path('app_cart_add', {'productId': product.id}) }}" class="btn btn-outline-success">Ajouter à ma box</a>
+                <a href="{{ path('app_cart_add', {'id': product.id}) }}" class="btn btn-outline-success">Ajouter à ma box</a>
             </div>
         </div>
     </div>
