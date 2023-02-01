@@ -18,6 +18,12 @@ framework:
     php_errors:
         log: true
 
+    http_client:
+        scoped_clients:
+            woocommerce.api:
+                base_uri: '%woocommerce_url%'
+                auth_basic: '%env(APP_WOO_KEY)%:%env(APP_WOO_SECRET)%'
+
 when@test:
     framework:
         test: true

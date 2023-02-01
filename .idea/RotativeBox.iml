@@ -75,6 +75,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-code" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/deployer/deployer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/apache-pack" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-client-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/graviton/link-header-rel-parser" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -37,3 +37,4 @@ document.querySelectorAll('.pricingBox').forEach((box) => {
     toggleActive(targetBox);
   });
 })
+

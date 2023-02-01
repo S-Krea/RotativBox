@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use App\Exception\BoxFullException;
+use App\Exception\ItemAlreadyInBoxException;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class Box
@@ -14,9 +16,10 @@ class Box
 
     protected Customer $user;
 
-    public function __construct($maxItems)
+    public function __construct($maxItems = 3)
     {
         $this->maxItems = $maxItems;
+        $this->items = new ArrayCollection();
     }
 
     /**
@@ -40,7 +43,7 @@ class Box
     /**
      * @return array
      */
-    public function getItems(): array
+    public function getItems(): ArrayCollection
     {
         return $this->items;
     }
@@ -49,7 +52,7 @@ class Box
      * @param array $items
      * @return Box
      */
-    public function setItems(array $items): Box
+    public function setItems(ArrayCollection $items): Box
     {
         $this->items = $items;
         return $this;
@@ -73,5 +76,33 @@ class Box
         return $this;
     }
 
+    public function addItem($product)
+    {
+        if  ($this->isFull()) {
+            throw new BoxFullException();
+        }
+
+        if  ($this->items->contains($product)) {
+            throw new ItemAlreadyInBoxException();
+        }
+
+        $this->items->add($product);
+
+        return $this;
+    }
+
+    public function removeItem($product)
+    {
+        if ($this->items->contains($product)) {
+            $this->items->removeElement($product);
+        }
+
+        return $this;
+    }
+
+    public function isFull()
+    {
+        return ($this->items->count() >= $this->maxItems);
+    }
 
 }

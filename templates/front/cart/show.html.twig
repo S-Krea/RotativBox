@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block mainContent %}
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        Produit
+                    </th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for product in box.items %}
+                    <tr>
+                        <td>{{ product }}</td>
+                        <td>
+                            <a href="{{ path('app_cart_remove', {'productId': product}) }}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

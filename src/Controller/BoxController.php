@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Model\Box;
+use App\Service\ProductFetcher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BoxController extends AbstractController
@@ -12,11 +15,15 @@ class BoxController extends AbstractController
     #[Route(path: '/box/{type}', name: "box_chose", requirements: [
         'type' => '\d+',
     ])]
-    public function pickItems(Request $request, $type)
+    public function listProducts(Request $request, $type,?Box $box = null)
     {
-        $savedBox = $request->getSession()->has(Box::BOX_SESSION_KEY, null);
-        $box = new Box($type);
+        $intType = intval($type);
 
-        return $this->render('front/box/pick_items.html.twig', ['box' => $box, 'savedBox' => $savedBox]);
+        if (!$box || ($box->getMaxItems() !== $intType)) {
+            $box = new Box($type);
+            $request->getSession()->set(Box::BOX_SESSION_KEY, $box);
+        }
+
+        return $this->render('front/products/list.html.twig', ['box' => $box, 'savedBox' => $box]);
     }
 }

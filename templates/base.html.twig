@@ -32,10 +32,21 @@
                     <a class="me-3 py-2 text-dark text-decoration-none" href="#">Le concept</a>
                     <a class="me-3 py-2 text-dark text-decoration-none" href="#">Les autres produits Cime Dentaire</a>
                 </nav>
-                <a href="#" class="btn btn-outline-secondary">Ma box ({{ (boxContent)? boxContent.items|length : '0' }})</a>
+                <a href="{{ path('app_cart_show') }}" class="btn btn-outline-secondary">Ma box ({{ (boxContent)? boxContent.items|length : '0' }})</a>
             </div>
         </header>
         <main class="container">
+            {% block flashes %}
+                {% for type, flashes in app.flashes %}
+                    {% for message in flashes %}
+                        <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            {% endblock %}
+
             {% block mainContent %}{% endblock %}
         </main>
     </div>
