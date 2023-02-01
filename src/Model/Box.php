@@ -82,18 +82,20 @@ class Box
             throw new BoxFullException();
         }
 
-        if  ($this->items->contains($product)) {
+        if  ($this->items->containsKey($product->getId())) {
             throw new ItemAlreadyInBoxException();
         }
 
-        $this->items->add($product);
+        $this->items->set($product->getId(), $product);
 
         return $this;
     }
 
     public function removeItem($product)
     {
-        $this->items->removeElement($product);
+        if ($this->items->containsKey($product->getId())) {
+            $this->items->remove($product->getId());
+        }
 
         return $this;
     }
