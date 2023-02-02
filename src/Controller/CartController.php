@@ -5,8 +5,12 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Exception\BoxFullException;
 use App\Exception\ItemAlreadyInBoxException;
+use App\Form\DevisForm;
 use App\Model\Box;
+use App\Service\Mailer;
+use App\Service\PriceCalculator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -48,5 +52,37 @@ class CartController extends AbstractController
     public function showCart(Request $request, ?Box $box = null)
     {
         return $this->render('front/cart/show.html.twig', ['box' => $box]);
+    }
+
+    #[Route(path:'/_calculate', name: 'cart_calculate', methods: ['POST'])]
+    public function calculate(Request $request, ?Box $box, PriceCalculator $calculator)
+    {
+        $params = json_decode($request->getContent());
+
+        $nbMois = $params->nbMois ?? 36;
+        $typeFinance = $params->financement ?? 'linear';
+
+        $result = $calculator->calculate($box, $nbMois, $typeFinance);
+        $form = $this->createForm(DevisForm::class,['nbMois' => $nbMois, 'financement' => $typeFinance]);
+
+        $html = $this->renderView('front/cart/_financement.html.twig', ['result' => $result, 'form' => $form]);
+
+        return new JsonResponse([
+            'html' => $html
+        ]);
+    }
+
+    #[Route(path: '/cart/validate', name: 'cart_validate')]
+    public function validate(Request $request, Mailer $mailer, PriceCalculator $calculator, ?Box $box = null)
+    {
+        $form = $this->createForm(DevisForm::class);
+        $form->handleRequest($request);
+
+        $dataDevis = $form->getData();
+        $results = $calculator->calculate($box, $dataDevis['nbMois'], $dataDevis['financement']);
+
+        $mailer->sendBox($box, $dataDevis, $results);
+
+
     }
 }

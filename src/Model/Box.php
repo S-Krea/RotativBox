@@ -105,4 +105,13 @@ class Box
         return ($this->items->count() >= $this->maxItems);
     }
 
+    public function getProductTotal()
+    {
+        $total = 0;
+        foreach ($this->items as $item) {
+            $total+= (float)$item->getPrice();
+        }
+
+        return $total;
+    }
 }

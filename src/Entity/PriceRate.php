@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Model\FinancingMode;
 use App\Repository\PriceRateRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -19,8 +20,8 @@ class PriceRate
     #[ORM\Column]
     private ?int $months = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $financingMode = null;
+    #[ORM\Column(length: 50, enumType: FinancingMode::class)]
+    private ?FinancingMode $financingMode = null;
 
     public function getId(): ?int
     {
@@ -51,12 +52,12 @@ class PriceRate
         return $this;
     }
 
-    public function getFinancingMode(): ?string
+    public function getFinancingMode(): ?FinancingMode
     {
         return $this->financingMode;
     }
 
-    public function setFinancingMode(string $financingMode): self
+    public function setFinancingMode(FinancingMode $financingMode): self
     {
         $this->financingMode = $financingMode;
 

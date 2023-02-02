@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Service;
+
+use App\Model\Box;
+use App\Model\FinancingMode;
+use App\Repository\PriceRateRepository;
+
+class PriceCalculator
+{
+    private PriceRateRepository $priceRateRepository;
+
+    public function __construct(PriceRateRepository $priceRateRepository)
+    {
+        $this->priceRateRepository = $priceRateRepository;
+    }
+
+    public function calculate(Box $box, $nbMois, $typeFinancement)
+    {
+        $financingMode = FinancingMode::from($typeFinancement);
+        $priceRate = $this->priceRateRepository->findOneBy([
+            'months' => $nbMois,
+            'financingMode' =>$financingMode,
+        ]);
+
+        if (!$priceRate) {
+            //TODO : Throw an exception
+            return false;
+        }
+
+        $total = $box->getProductTotal();
+        $firstPayment = $financingMode->firstPaymentRate() * $total;
+        $financingRate = (float)$priceRate->getRate();
+
+        $mensualite = $total * $financingRate;
+
+        return [
+            'nbMois' => $nbMois,
+            'type' => $financingMode,
+            'total' => $total,
+            'rate' => $financingRate,
+            'firstPayment' => $firstPayment,
+            'monthlyPayment' => $mensualite,
+        ];
+    }
+}

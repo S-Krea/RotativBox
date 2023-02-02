@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div>
+    <p>
+        <b>Un nouveau devis Rotativ Box vient d'être réalisé</b>
+        <h4>Coordonnées du prospect : </h4>
+        <p>
+            Nom : {{ params.nom }}
+            <br>
+            Prénom : {{ params.prenom }}
+            <br>
+            Email : {{ params.email }}
+            <br>
+            Tel : {{ params.tel }}
+        </p>
+    </p>
+</div>
+<div>
+    <h4>Contenu de la box</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produit</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in box.items %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price|round(2) }} €</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfooter>
+            <tr>
+                <th>Total</th>
+                <th colspan="2">{{ box.productTotal|round(2) }}€</th>
+            </tr>
+        </tfooter>
+    </table>
+</div>
+<div id="financement">
+    <div class="row mt-4">
+        <div class="col rounded-2 bg-light py-3 px-2">
+            <h3>Financement sur {{ result.nbMois }} mois</h3>
+            <div>
+                {% set delta = 0 %}
+                {% if result.firstPayment > 0 %}
+                    Un premier paiement de {{ result.firstPayment }} €
+                    Puis :
+                    {% set delta = 1 %}
+                {% endif %}
+                {% set nbMensualite = (result.nbMois - delta) %}
+                <p>
+                    {{ nbMensualite }} paiement de {{ result.monthlyPayment|round(2) }}€ / mois
+                </p>
+
+                {% set totalCredit = result.firstPayment + (nbMensualite*result.monthlyPayment) %}
+
+                <p class="small text-muted">
+                    Coût Total : {{ result.total }} €<br>
+                    Total Credit : {{ totalCredit|round(2) }} €<br>
+                    Coût du crédit : {{ (totalCredit - result.total)|round(2) }} €
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
