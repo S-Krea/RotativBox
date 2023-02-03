@@ -18,4 +18,14 @@ enum FinancingMode: string
             FinancingMode::Formula3 => 0.3,
         };
     }
+
+    public function getHumanLabel()
+    {
+        return match($this) {
+            FinancingMode::Linear => 'Lineaire',
+            FinancingMode::Formula1 => '1er loyer 10%',
+            FinancingMode::Formula2 => '1er loyer 20%',
+            FinancingMode::Formula3 => '1er loyer 30%',
+        };
+    }
 }

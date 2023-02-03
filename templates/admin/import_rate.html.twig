@@ -1,0 +1,50 @@
+{% form_theme form 'bootstrap_5_horizontal_layout.html.twig' %}
+{% extends "admin/base.html.twig" %}
+
+{% block mainContent %}
+    <h3>Import des taux de financement</h3>
+    <p>Vous pouvez importer de nouveaux taux pour le calcul des Rotativ Box via le formulaire ci-dessous.</p>
+
+    <h4>Taux actuellement en place</h4>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombres de mois</th>
+                    {% for rate in rates|first %}
+                            <th>{{ rate.financingMode.humanLabel }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for group in rates %}
+                <tr>
+                        <td>{{ (group|first).months }} Mois</td>
+                    {% for rate in group %}
+                        <td>{{ (rate.rate)*100 }} %</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <hr />
+    <ul class="list-unstyled">
+        <li><a href="{{ templateFile }}" target="_blank">Téléchargez ici</a> le fichier modèle.</li>
+        <li>Modifiez les taux</li>
+        <li>Réimportez le via le formulaire ci-dessous</li>
+    </ul>
+    <div class="row">
+        <div class="col">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn btn-outline-success">Importer</button>
+                </div>
+            </div>
+            {{ form_rest(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
