@@ -114,4 +114,21 @@ class Box
 
         return $total;
     }
+
+    public function getMaintenanceCost()
+    {
+        $coeff = 1;
+        $maintenancePrice = 350;
+
+        switch ($this->maxItems) {
+            case 6:
+                $coeff = 3;
+                break;
+            case 9:
+                $coeff = 4;
+                break;
+        }
+
+        return $coeff * $maintenancePrice;
+    }
 }

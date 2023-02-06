@@ -22,11 +22,17 @@
                         </td>
                     </tr>
                 {% endfor %}
+                <tr>
+                    <td>Forfait Maintenance</td>
+                    <td>{{ box.maintenanceCost|round(2) }} €</td>
+                    <td></td>
+                </tr>
                 </tbody>
                 <tfooter>
+                    {% set total = box.productTotal + box.maintenanceCost %}
                     <tr>
                         <th>Total</th>
-                        <th colspan="2">{{ box.productTotal|round(2) }}€</th>
+                        <th colspan="2">{{ total|round(2) }}€</th>
                     </tr>
                 </tfooter>
             </table>
@@ -34,9 +40,19 @@
         <div class="row">
             <form action="{{ path('app_cart_calculate') }}" method="post" id="calculator">
                 <h3>Conditions de financement</h3>
-                <label for="nbMonths" class="form-label">Nombre de mois</label>
-                <input type="range" min="12" max="84" step="12" class="form-range" id="nbMonths" name="params[nbMois]" value="36" />
+                <h5>Nombre de mois</h5>
+                <div class="rangeWrapper">
+                    <div class="values">
+                        <span class="min"></span>
+                        <span class="value"></span>
+                        <span class="max"></span>
+                    </div>
+                    <div class="range">
+                        <input type="range" min="12" max="84" step="12" class="form-range" id="nbMonths" name="params[nbMois]" value="36" />
+                    </div>
+                </div>
 
+                <h5>Votre apport :</h5>
                 <input type="radio" class="btn-check" name="params[financement]" id="option1" autocomplete="off" checked value="linear">
                 <label class="btn btn-secondary" for="option1">Pas d'apport</label>
 

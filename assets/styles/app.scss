@@ -201,3 +201,15 @@ $primary:#0e1e35;
   from, 17% { transform: translateY(-100%); }
   41%, to { transform: translateY(100%); }
 }
+
+
+.rangeWrapper{
+  .values{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    .value{
+      position: absolute;
+    }
+  }
+}

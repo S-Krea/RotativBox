@@ -29,6 +29,7 @@ class PriceCalculator
         }
 
         $total = $box->getProductTotal();
+        $total += $box->getMaintenanceCost();
         $firstPayment = $financingMode->firstPaymentRate() * $total;
         $financingRate = (float)$priceRate->getRate();
 
