@@ -1,4 +1,5 @@
 $primary:#0e1e35;
+$info: #2EA7C0FF;
 @import '~bootstrap/scss/bootstrap';
 
 * {
@@ -211,5 +212,12 @@ $primary:#0e1e35;
     .value{
       position: absolute;
     }
+  }
+}
+
+.apport{
+  .btn-check:checked + label{
+    background: $info;
+    color: $white;
   }
 }

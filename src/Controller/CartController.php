@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Exception\BoxFullException;
 use App\Exception\ItemAlreadyInBoxException;
+use App\Exception\PriceRateNotFoundException;
 use App\Form\DevisForm;
 use App\Model\Box;
 use App\Service\Mailer;
@@ -13,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Json;
 
 class CartController extends AbstractController
 {
@@ -51,6 +53,12 @@ class CartController extends AbstractController
     #[Route(path: '/cart', name: 'cart_show')]
     public function showCart(Request $request, ?Box $box = null)
     {
+        if (!$box) {
+            $this->addFlash('warning', 'Vous n\'avez pas encore sélectionné de box.');
+
+            return $this->redirectToRoute('app_home');
+        }
+
         return $this->render('front/cart/show.html.twig', ['box' => $box]);
     }
 
@@ -62,7 +70,13 @@ class CartController extends AbstractController
         $nbMois = $params->nbMois ?? 36;
         $typeFinance = $params->financement ?? 'linear';
 
-        $result = $calculator->calculate($box, $nbMois, $typeFinance);
+        try {
+            $result = $calculator->calculate($box, $nbMois, $typeFinance);
+        } catch (PriceRateNotFoundException $e) {
+            return new Json([
+                'html' => 'Une erreur est intervenue : '.$e->getMessage(),
+            ]);
+        }
         $form = $this->createForm(DevisForm::class,['nbMois' => $nbMois, 'financement' => $typeFinance]);
 
         $html = $this->renderView('front/cart/_financement.html.twig', ['result' => $result, 'form' => $form]);
@@ -79,10 +93,15 @@ class CartController extends AbstractController
         $form->handleRequest($request);
 
         $dataDevis = $form->getData();
-        $results = $calculator->calculate($box, $dataDevis['nbMois'], $dataDevis['financement']);
+        try {
+            $results = $calculator->calculate($box, $dataDevis['nbMois'], $dataDevis['financement']);
+            $mailer->sendBox($box, $dataDevis, $results);
+            $request->getSession()->remove(Box::BOX_SESSION_KEY);
+            $this->addFlash('success', 'Votre devis a été envoyé à notre service commercial. Vous serez recontacté sous peu.');
+        } catch (PriceRateNotFoundException $e) {
+            $this->addFlash('danger', $e->getMessage());
+        }
 
-        $mailer->sendBox($box, $dataDevis, $results);
-
-
+        return $this->redirectToRoute('app_home');
     }
 }

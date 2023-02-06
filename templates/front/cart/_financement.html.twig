@@ -18,9 +18,9 @@
                 {% set totalCredit = result.firstPayment + (nbMensualite*result.monthlyPayment) %}
 
                 <p class="small text-muted">
-                    Coût Total : {{ result.total }} <br>
-                    Total Credit : {{ totalCredit|round(2) }} <br>
-                    Coût du crédit : {{ (totalCredit - result.total)|round(2) }}
+                    Coût Total : {{ result.total|round(2) }} € <br>
+                    Total Credit : {{ totalCredit|round(2) }} € <br>
+                    Coût du crédit : {{ (totalCredit - result.total)|round(2) }} €
                 </p>
             </div>
             <div class="row">

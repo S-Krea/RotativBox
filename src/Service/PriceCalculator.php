@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Exception\PriceRateNotFoundException;
 use App\Model\Box;
 use App\Model\FinancingMode;
 use App\Repository\PriceRateRepository;
@@ -24,8 +25,7 @@ class PriceCalculator
         ]);
 
         if (!$priceRate) {
-            //TODO : Throw an exception
-            return false;
+            throw new PriceRateNotFoundException();
         }
 
         $total = $box->getProductTotal();
