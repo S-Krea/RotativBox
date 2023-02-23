@@ -1,45 +1,134 @@
 {% extends "base.html.twig" %}
 
 {% block mainContent %}
-    <div class="row">
-        <div class="pricing-header pb-md-4 mx-auto text-center">
-            <h2 class="display-4 fw-normal">Choisissez votre Rotativ'Box</h2>
-            <p class="fs-5 text-muted">Ici un court descriptif du concept avec un lien vers la page de détail du concept ?</p>
+    <div class="hero-banner bg-dark-blue py-5">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col">
+                    <h1>
+                        La <span class="text-white">solution tout-en-un</span>
+                        <br>simple et pratique
+                    </h1>
+                    <p class="fs-4">Choisissez votre box par Cime Dentaire</p>
+                </div>
+
+                <div class="col">
+                    <p>Parce qu'ils sont le prolongement technologique de vos mains et essentiels à l'activité du
+                        cabinet, nous vous offrons ici un concentré de service, de confort et de simplicité
+                        autour des meilleures marques d'instruments rotatifs du marché.
+                        Les mêmes prix que sur le web, le service de proximité en plus !
+                        Votre temps est précieux. En prendre soin est notre métier.
+                    </p>
+                    <a href="#" class="btn bg-light-blue text-uppercase text-white">Le concept</a>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-        <div class="col pricingBox">
-            <div class="card mb-4 rounded-3 shadow-sm">
-                <div class="card-header py-3">
-                    <h4 class="my-0 fw-normal">Box 3</h4>
-                </div>
-                <div class="card-body">
-                    <h2 class="card-title pricing-card-title">3 items</h2>
-                    <a href="{{ path('app_box_chose', {'type' : 3}) }}" class="w-100 btn btn-lg btn-outline-primary">Composer ma box</a>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center offers">
+
+            <div class="col pricingBox offer-first">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <div class="card-header">
+                        <h4 class="my-0 fw-normal">3 | FIRST</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title pricing-card-title">3 rotatifs au choix dès 79€ TTC/mois</p>
+
+                        <a role="button" data-bs-toggle="collapse" data-bs-target="#bullets-first" class="toggle-detail">Voir le détail</a>
+
+                        <div class="collapse detail-list" id="bullets-first">
+                            <div class="list-group">
+                                {{ _self.detailListItem("Garantie 36 mois (Pièce et main d'oeuvre)") }}
+                                {{ _self.detailListItem('1er loyer modulable de 0 à 30%') }}
+                                {{ _self.detailListItem('Gestion 100% SAV (Enlèvement + retour cabinet)') }}
+                                {{ _self.detailListItem('Prêt matériel de remplacement') }}
+                                {{ _self.detailListItem('Réparation avec pièces d\'origine') }}
+                                {{ _self.detailListItem('Interlocuteur unique Cime dentaire') }}
+                            </div>
+                        </div>
+                        <div class="row bottom">
+                            <div class="col">
+                                <a href="{{ path('app_box_chose', {'type' : 3}) }}"
+                                   class="btn btn-lg bg-dark-blue text-white">Composer ma box</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col pricingBox active">
-            <div class="card mb-4 rounded-3 shadow-sm border-primary">
-                <div class="card-header py-3 border-primary text-bg-primary">
-                    <h4 class="my-0 fw-normal">Box 6</h4>
-                </div>
-                <div class="card-body">
-                    <h2 class="card-title pricing-card-title">6 items</h2>
-                    <a href="{{ path('app_box_chose', {'type': 6}) }}" class="w-100 btn btn-lg btn-primary">Composer ma box</a>
+
+            <div class="col pricingBox offer-expert">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <div class="card-header">
+                        <h4 class="my-0 fw-normal">6 | EXPERT</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title pricing-card-title">6 rotatifs au choix dès 169€ TTC/mois</p>
+
+                        <a role="button" data-bs-toggle="collapse" data-bs-target="#bullets-expert" class="toggle-detail">Voir le détail</a>
+
+                        <div class="collapse detail-list" id="bullets-expert">
+                            <div class="list-group">
+                                {{ _self.detailListItem("Garantie 48 mois (Pièce et main d'oeuvre)") }}
+                                {{ _self.detailListItem('1er loyer modulable de 0 à 30%') }}
+                                {{ _self.detailListItem('Gestion 100% SAV (Enlèvement + retour cabinet)') }}
+                                {{ _self.detailListItem('Prêt matériel de remplacement') }}
+                                {{ _self.detailListItem('Réparation avec pièces d\'origine') }}
+                                {{ _self.detailListItem('Interlocuteur unique Cime dentaire') }}
+                                <p class="list-group-item fw-bold py-2 mb-0 mt-1">Option</p>
+                                {{ _self.detailListItem('Retrait tout-en-un par DAC Universal S') }}
+                                <p class="small list-group-item">(+150€ TTC/mois)</p>
+                            </div>
+                        </div>
+                        <div class="row bottom">
+                            <div class="col">
+                                <a href="{{ path('app_box_chose', {'type' : 6}) }}"
+                                   class="btn btn-lg bg-dark-blue text-white">Composer ma box</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col pricingBox">
-            <div class="card mb-4 rounded-3 shadow-sm">
-                <div class="card-header py-3">
-                    <h4 class="my-0 fw-normal">Box 9</h4>
-                </div>
-                <div class="card-body">
-                    <h2 class="card-title pricing-card-title">9 items</h2>
-                    <a href="{{ path('app_box_chose', {'type' : 9}) }}" class="w-100 btn btn-lg btn-outline-primary">Composer ma box</a>
+
+            <div class="col pricingBox offer-master">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <div class="card-header">
+                        <h4 class="my-0 fw-normal">9 | MASTER</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title pricing-card-title">9 rotatifs au choix dès 219€ TTC/mois</p>
+
+                        <a role="button" data-bs-toggle="collapse" data-bs-target="#bullets-master" class="toggle-detail">Voir le détail</a>
+
+                        <div class="collapse detail-list" id="bullets-master">
+                            <div class="list-group">
+                                {{ _self.detailListItem("Garantie 60 mois (Pièce et main d'oeuvre)") }}
+                                {{ _self.detailListItem('1er loyer modulable de 0 à 30%') }}
+                                {{ _self.detailListItem('Gestion 100% SAV (Enlèvement + retour cabinet)') }}
+                                {{ _self.detailListItem('Prêt matériel de remplacement') }}
+                                {{ _self.detailListItem('Réparation avec pièces d\'origine') }}
+                                {{ _self.detailListItem('Interlocuteur unique Cime dentaire') }}
+                                <p class="list-group-item fw-bold py-2 mb-0 mt-1">Option</p>
+                                {{ _self.detailListItem('Retrait tout-en-un par DAC Universal S') }}
+                                <p class="small list-group-item">(+150€ TTC/mois)</p>
+                            </div>
+                        </div>
+                        <div class="row bottom">
+                            <div class="col">
+                                <a href="{{ path('app_box_chose', {'type' : 9}) }}"
+                                   class="btn btn-lg bg-dark-blue text-white">Composer ma box</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 {% endblock %}
+
+{% macro detailListItem(text) %}
+    <div class="list-group-item">
+        <i class="check bi bi-check2"></i>
+        <span>{{ text }}</span>
+    </div>
+{% endmacro %}

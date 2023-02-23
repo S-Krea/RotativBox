@@ -18,24 +18,20 @@
 {% set boxContent = app.session.get(constant('App\\Model\\Box::BOX_SESSION_KEY'), null) %}
 {% block body %}
     <div class="container-fluid m-0 p-0 pt-3 min-vh-100">
-        <header class="px-2">
-            <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
-                <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-                    <h1 class="fs-4">
-                        <span class="fs-4">Rotativ'Box <br/>
-                            <span class="fs-5">by Cime Dentaire</span>
-                        </span>
-                    </h1>
+        <header>
+            <div class="d-flex flex-column flex-md-row align-items-center pb-3 border-bottom">
+                <a href="/" class="d-flex align-items-center text-dark text-decoration-none navbar-brand">
+                    <img src="{{ asset('build/static/images/logo-rotativ-box-couleur.png') }}" alt="Rotativ'Box">
                 </a>
                 <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-                    <a class="me-3 py-2 text-dark text-decoration-none" href="#">Les boxs</a>
-                    <a class="me-3 py-2 text-dark text-decoration-none" href="#">Le concept</a>
-                    <a class="me-3 py-2 text-dark text-decoration-none" href="#">Les autres produits Cime Dentaire</a>
+                    <a class="me-5 py-2 text-decoration-none active" href="#">Les boxs</a>
+                    <a class="me-5 py-2 text-decoration-none" href="#">Le concept</a>
+                    <a class="me-5 py-2 text-decoration-none" href="{{ cimedentaire_url }}">Autres produits</a>
+                    <a href="{{ path('app_cart_show') }}" class="btn bg-light-blue text-white">Ma box ({{ (boxContent)? boxContent.items|length : '0' }})</a>
                 </nav>
-                <a href="{{ path('app_cart_show') }}" class="btn btn-outline-secondary">Ma box ({{ (boxContent)? boxContent.items|length : '0' }})</a>
             </div>
         </header>
-        <main class="container">
+        <main class="container-fluid">
             {% block flashes %}
                 {% for type, flashes in app.flashes %}
                     {% for message in flashes %}
@@ -49,6 +45,22 @@
 
             {% block mainContent %}{% endblock %}
         </main>
+        <footer>
+            <div class="row">
+                <div class="col">
+                    <div id="logoRotativ" class="logo"></div>
+                    <div id="logoCime" class="logo"></div>
+                </div>
+                <div class="col">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <p class="small text-muted">&copy; Cime dentaire - {{ 'now'|date('Y') }}</p>
+                </div>
+            </div>
+        </footer>
     </div>
 {% endblock %}
 </body>

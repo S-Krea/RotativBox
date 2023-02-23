@@ -27,6 +27,7 @@ function toggleActive(toggledBox) {
   toggledBox.classList.toggle('active');
 }
 
+/*
 document.querySelectorAll('.pricingBox').forEach((box) => {
   box.addEventListener('click', function(event) {
     const targetBox = event.currentTarget;
@@ -37,4 +38,5 @@ document.querySelectorAll('.pricingBox').forEach((box) => {
     toggleActive(targetBox);
   });
 })
+ */
 
