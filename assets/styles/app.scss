@@ -3,7 +3,16 @@ $lighterBlue: #374F95;
 $primary: $darkBlue;
 $info: #2EA7C0FF;
 $lightGray: #898F9B;
-$salmon:#E48E89;
+$salmon: #E48E89;
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+$customColors: (
+        'dark-blue' : $darkBlue,
+        'light-gray': $lightGray,
+);
+
+$theme-colors: map-merge($theme-colors, $customColors);
 
 @import '~bootstrap/scss/bootstrap';
 @import '~bootstrap-icons/font/bootstrap-icons.scss';
@@ -14,7 +23,7 @@ body {
   min-height: 100dvh;
 }
 
-.flashes{
+.flashes {
   position: fixed;
   top: 0;
   width: 100%;
@@ -25,7 +34,15 @@ body {
   color: $lightGray;
 }
 
-.btn.bg-dark-blue.disabled{
+.text-light-blue {
+  color: $lighterBlue !important;
+}
+
+.text-dark-blue {
+  color: $darkBlue !important;
+}
+
+.btn.bg-dark-blue.disabled {
   background-color: $darkBlue;
   opacity: 0.3;
 }
@@ -56,7 +73,7 @@ header {
   }
 }
 
-main{
+main {
   min-height: 75vh;
 }
 
@@ -64,18 +81,19 @@ main{
   height: 500px;
 }
 
-.banner{
+.banner {
   margin-left: -#{$container-padding-x};
   margin-right: -#{$container-padding-x};
 }
 
-.product-list{
+.product-list {
   margin-top: 50px;
 
-  .product-card{
-    .card-title{
+  .product-card {
+    .card-title {
       color: $lighterBlue;
     }
+
     color: $lightGray;
   }
 }
@@ -94,7 +112,7 @@ $offersColor: (
     color: $white;
   }
 
-  i.check{
+  i.check {
     background-color: map-get($offersColor, $type);
     color: #FFF;
     border-radius: 50%;
@@ -115,7 +133,7 @@ $offersColor: (
     background-color: #F3F4F6;
     /*height: 800px;*/
 
-    .card-title{
+    .card-title {
       font-size: 1.4rem;
       font-weight: 500;
       margin-bottom: 20px;
@@ -124,16 +142,16 @@ $offersColor: (
     .card-body {
       display: grid;
 
-      .toggle-detail{
+      .toggle-detail {
         margin-bottom: 2rem;
       }
 
-      .detail-list{
+      .detail-list {
         margin-bottom: 20px;
 
-        .list-group-item{
+        .list-group-item {
           background: none;
-          border:none;
+          border: none;
           width: 100%;
           text-align: left;
         }
@@ -159,10 +177,13 @@ $offersColor: (
   }
 }
 
-.text-salmon{
+.text-salmon {
   color: $salmon;
 }
 
+.product-thumb {
+  max-width: 150px;
+}
 
 .rangeWrapper {
   .values {
@@ -178,14 +199,30 @@ $offersColor: (
 
 .apport {
   .btn-check:checked + label {
-    background: $info;
+    background: $darkBlue;
     color: $white;
   }
 }
 
-footer{
+.mensualite{
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+form[name='devis'] {
+  label {
+    font-weight: bold;
+  }
+
+  input[type='text'],input[type='email'] {
+    height: 50px;
+  }
+}
+
+footer {
   background: $darkBlue;
   padding: 20px 50px;
+
   .logo {
     display: inline-block;
     aspect-ratio: 1;
@@ -193,9 +230,11 @@ footer{
     background-position: center center;
     background-size: contain;
     background-repeat: no-repeat;
+
     &#logoRotativ {
       background-image: url('../static/images/logo-rotativ-box-blanc.png');
     }
+
     &#logoCime {
       aspect-ratio: 16/10;
       background-image: url('../static/images/logo-cimedentaire.svg');
@@ -203,19 +242,22 @@ footer{
     }
   }
 
-  .logos{
-    flex-grow:3;
+  .logos {
+    flex-grow: 3;
   }
 
-  ul{
+  ul {
     border-left: solid 2px $lightGray;
     padding-left: 20px !important;
-    li{
+
+    li {
       margin-bottom: 15px;
+
       a {
         color: $lightGray;
         text-decoration: none;
-        &:hover{
+
+        &:hover {
           color: $white;
         }
       }

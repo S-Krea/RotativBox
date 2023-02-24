@@ -1,9 +1,9 @@
-{% form_theme form "bootstrap_5_horizontal_layout.html.twig" %}
+{% form_theme form "bootstrap_5_layout.html.twig" %}
 <div id="financement">
     <div class="row mt-4">
-        <div class="col rounded-2 bg-light py-3 px-2">
-            <h3>Financement sur {{ result.nbMois }} mois</h3>
-            <div>
+        <div class="col bg-light rounded-3 py-4 px-4">
+            <h3 class="text-dark-blue pb-3">Financement sur {{ result.nbMois }} mois</h3>
+            <div class="text-dark-blue">
                 {% set delta = 0 %}
                 {% if result.firstPayment > 0 %}
                     Un premier paiement de {{ result.firstPayment }} €
@@ -11,22 +11,23 @@
                     {% set delta = 1 %}
                 {% endif %}
                 {% set nbMensualite = (result.nbMois - delta) %}
-                <p>
+                <p class="mensualite">
                    {{ nbMensualite }} paiement de {{ result.monthlyPayment|round(2) }}€ / mois
                 </p>
 
                 {% set totalCredit = result.firstPayment + (nbMensualite*result.monthlyPayment) %}
-
+                {#
                 <p class="small text-muted">
                     Coût Total : {{ result.total|round(2) }} € <br>
                     Total Credit : {{ totalCredit|round(2) }} € <br>
                     Coût du crédit : {{ (totalCredit - result.total)|round(2) }} €
                 </p>
+                #}
             </div>
             <div class="row">
                 {{ form_start(form, {'action':path('app_cart_validate')}) }}
                     {{ form_widget(form) }}
-                    <button type="submit" class="btn btn-outline-success">Valider ma box et prendre contact avec un commercial</button>
+                    <button type="submit" class="btn btn-dark-blue">Valider ma box et prendre contact avec un commercial</button>
                 {{ form_end(form) }}
             </div>
         </div>
