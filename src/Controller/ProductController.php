@@ -2,11 +2,9 @@
 
 namespace App\Controller;
 
-use App\Model\Product;
+use App\Model\Box;
 use App\Repository\ProductRepository;
-use App\Service\ProductFetcher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,12 +13,12 @@ class ProductController extends AbstractController
 {
 
     #[Route(path: '/', name: "_list")]
-    public function listProducts(ProductRepository $productRepository, Request $request)
+    public function listProducts(ProductRepository $productRepository, ?Box $box)
     {
 
         $products = $productRepository->findAll();
 
-        return $this->render('front/products/list.html.twig', ['products' => $products]);
+        return $this->render('front/products/list.html.twig', ['products' => $products, 'box' => $box]);
     }
 
 }

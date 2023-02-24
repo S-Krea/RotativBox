@@ -131,4 +131,23 @@ class Box
 
         return $coeff * $maintenancePrice;
     }
+
+    public function getLabel()
+    {
+        return match($this->maxItems){
+            3 => "First",
+            6 => 'Expert',
+            9 => 'Master',
+        };
+    }
+
+    public function getRemainings()
+    {
+        return $this->maxItems - $this->items->count();
+    }
+
+    public function contains($product)
+    {
+        return $this->items->containsKey($product->getId());
+    }
 }

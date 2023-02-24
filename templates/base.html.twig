@@ -27,12 +27,13 @@
                     <a class="me-5 py-2 text-decoration-none active" href="#">Les boxs</a>
                     <a class="me-5 py-2 text-decoration-none" href="#">Le concept</a>
                     <a class="me-5 py-2 text-decoration-none" href="{{ cimedentaire_url }}">Autres produits</a>
-                    <a href="{{ path('app_cart_show') }}" class="btn bg-light-blue text-white">Ma box ({{ (boxContent)? boxContent.items|length : '0' }})</a>
+                    <a href="{{ path('app_cart_show') }}" class="btn bg-light-blue text-white">Ma box
+                        ({{ (boxContent)? boxContent.items|length : '0' }})</a>
                 </nav>
             </div>
         </header>
-        <main class="container-fluid">
-            {% block flashes %}
+        {% block flashes %}
+            <div class="flashes">
                 {% for type, flashes in app.flashes %}
                     {% for message in flashes %}
                         <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
@@ -41,8 +42,9 @@
                         </div>
                     {% endfor %}
                 {% endfor %}
-            {% endblock %}
-
+            </div>
+        {% endblock %}
+        <main class="container-fluid">
             {% block mainContent %}{% endblock %}
         </main>
         <footer>

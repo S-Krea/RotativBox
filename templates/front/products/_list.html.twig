@@ -1,16 +1,19 @@
 {% for product in products %}
-    <div class="col" >
-        <div class="card">
-
-            <img src="{{ product.image }}" class="card-img-top" alt="{{ product.imageAlt }}">
+    <div class="col product-card" >
+        <div class="card p-3">
+            <img src="{{ product.image }}" class="card-img-top rounded-3 mb-3" alt="{{ product.imageAlt }}">
             <div class="card-body">
-                <h5 class="card-title">{{ product.name }}</h5>
+                <h5 class="card-title fw-bold">{{ product.name }}</h5>
                 <p class="card-text">{{ product.shortDescription|raw }}</p>
-                <p class="fw-bold">Prix de vente : {{ product.price }} €</p>
+                {# <p class="fw-bold">Prix de vente : {{ product.price }} €</p> #}
                 <p>
                     <a href="{{ product.permalink }}" target="_blank" class="text-muted small">Plus d'infos</a>
                 </p>
-                <a href="{{ path('app_cart_add', {'id': product.id}) }}" class="btn btn-outline-success">Ajouter à ma box</a>
+                {% set disabled = '' %}
+                {% if box.contains(product) %}
+                    {% set disabled='disabled' %}
+                {% endif %}
+                <a href="{{ path('app_cart_add', {'id': product.id}) }}" class="btn bg-dark-blue text-white {{ disabled }}">Ajouter à ma box</a>
             </div>
         </div>
     </div>

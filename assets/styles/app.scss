@@ -3,6 +3,7 @@ $lighterBlue: #374F95;
 $primary: $darkBlue;
 $info: #2EA7C0FF;
 $lightGray: #898F9B;
+$salmon:#E48E89;
 
 @import '~bootstrap/scss/bootstrap';
 @import '~bootstrap-icons/font/bootstrap-icons.scss';
@@ -13,9 +14,20 @@ body {
   min-height: 100dvh;
 }
 
+.flashes{
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
 .bg-dark-blue, .bg-dark-blue:hover {
   background-color: $darkBlue;
   color: $lightGray;
+}
+
+.btn.bg-dark-blue.disabled{
+  background-color: $darkBlue;
+  opacity: 0.3;
 }
 
 .bg-light-blue, .bg-light-blue:hover {
@@ -50,8 +62,22 @@ main{
 
 .hero-banner {
   height: 500px;
+}
+
+.banner{
   margin-left: -#{$container-padding-x};
   margin-right: -#{$container-padding-x};
+}
+
+.product-list{
+  margin-top: 50px;
+
+  .product-card{
+    .card-title{
+      color: $lighterBlue;
+    }
+    color: $lightGray;
+  }
 }
 
 $offersColor: (
@@ -131,6 +157,10 @@ $offersColor: (
   .offer-master {
     @include offerCard('master');
   }
+}
+
+.text-salmon{
+  color: $salmon;
 }
 
 

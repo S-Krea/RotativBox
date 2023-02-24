@@ -1,8 +1,54 @@
 {% extends "base.html.twig" %}
 
 {% block mainContent %}
-    <div class="row row-cols-4 g-3">
-        {% include 'front/products/_list.html.twig' %}
+    <div class="banner bg-dark-blue py-5">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col">
+                    <h1>
+                        Je crée
+                        <span class="text-salmon">ma box {{ box.label }}</span>
+                        <br />en quelques clics
+                    </h1>
+                </div>
+
+                <div class="col">
+                    <p>Parce qu'ils sont le prolongement technologique de vos mains et essentiels à l'activité du
+                        cabinet, nous vous offrons ici un concentré de service, de confort et de simplicité
+                        autour des meilleures marques d'instruments rotatifs du marché.
+                        Les mêmes prix que sur le web, le service de proximité en plus !
+                        Votre temps est précieux. En prendre soin est notre métier.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row shadow-lg box-status py-4">
+        <div class="col">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        Il vous reste <b>{{ box.remainings }} sur {{ box.maxItems }}</b> produits à ajouter à votre box
+                    </div>
+                    <div class="col d-flex justify-content-end">
+                        <a href="{{ path('app_cart_show') }}" class="btn bg-light-blue text-white">Voir ma box ({{ (boxContent)? boxContent.items|length : '0' }})</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <span>
+                    Filtrer par marque :
+                </span>
+
+            </div>
+        </div>
+        <div class="row row-cols-4 g-3 product-list">
+            {% include 'front/products/_list.html.twig' %}
+        </div>
     </div>
 {% endblock %}
 
