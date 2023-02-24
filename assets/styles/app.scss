@@ -172,4 +172,23 @@ footer{
       width: 150px;
     }
   }
+
+  .logos{
+    flex-grow:3;
+  }
+
+  ul{
+    border-left: solid 2px $lightGray;
+    padding-left: 20px !important;
+    li{
+      margin-bottom: 15px;
+      a {
+        color: $lightGray;
+        text-decoration: none;
+        &:hover{
+          color: $white;
+        }
+      }
+    }
+  }
 }

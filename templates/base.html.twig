@@ -46,13 +46,40 @@
             {% block mainContent %}{% endblock %}
         </main>
         <footer>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-between">
+                <div class="col logos">
                     <div id="logoRotativ" class="logo"></div>
                     <div id="logoCime" class="logo"></div>
                 </div>
-                <div class="col">
-
+                <div class="col menu">
+                    <div class="row text-white">
+                        <div class="col">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="{{ path('app_home') }}">Les boxs</a>
+                                </li>
+                                <li>
+                                    <a href="#">Le concept</a>
+                                </li>
+                                <li>
+                                    <a href="">Autres produits</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="">Mentions légales</a>
+                                </li>
+                                <li>
+                                    <a href="">Politique de confidentialité</a>
+                                </li>
+                                <li>
+                                    &nbsp;
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
