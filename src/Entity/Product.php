@@ -41,6 +41,12 @@ class Product
     #[ORM\Column(length: 511, nullable: true)]
     private ?string $permalink;
 
+    #[ORM\Column(type: 'boolean', nullable: false)]
+    private bool $enabled = true;
+
+    #[ORM\ManyToOne(inversedBy: 'products', cascade: ['persist', 'remove'])]
+    private ?Brand $brand = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -151,6 +157,36 @@ class Product
     public function setPermalink(?string $permalink): Product
     {
         $this->permalink = $permalink;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param bool $enabled
+     * @return Product
+     */
+    public function setEnabled(bool $enabled): Product
+    {
+        $this->enabled = $enabled;
+        return $this;
+    }
+
+    public function getBrand(): ?Brand
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(?Brand $brand): self
+    {
+        $this->brand = $brand;
+
         return $this;
     }
 

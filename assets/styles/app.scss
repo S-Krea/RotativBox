@@ -185,6 +185,38 @@ $offersColor: (
   max-width: 150px;
 }
 
+.brand-filters{
+  .brand{
+    text-decoration: none;
+    margin-right: 20px;
+
+    &.active{
+      .brand-name, img{
+        background-color: $lightGray;
+      }
+      .brand-name{
+        color: $white;
+      }
+    }
+
+
+    .brand-name{
+      padding: 15px;
+      border-radius: 10px;
+      border: solid 1px var(--bs-border-color);
+      color: $lighterBlue;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    img{
+      max-width: 100px;
+      padding: 10px;
+      border-radius: 10px;
+    }
+  }
+}
+
 .rangeWrapper {
   .values {
     display: flex;

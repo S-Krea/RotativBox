@@ -39,11 +39,29 @@
     </div>
     <div class="container mt-5">
         <div class="row">
-            <div class="col">
+            <div class="col brand-filters">
                 <span>
                     Filtrer par marque :
-                </span>
+                    {% for brand in brands %}
+                        {% set url = path('app_products_list', {'brand':brand.slug}) %}
+                        {% set active = '' %}
 
+                        {% if filterSlug == brand.slug %}
+                            {% set url = path('app_products_list') %}
+                            {% set active = 'active' %}
+                        {% endif %}
+
+                        <a href="{{ url }}" class="brand {{ active }}">
+                            {% if brand.image %}
+                                <img class="" src="{{ brand.image }}" alt="{{ brand.name }}" />
+                            {% else %}
+                                <span class="brand-name">
+                                    {{ brand.name }}
+                                </span>
+                            {% endif %}
+                        </a>
+                    {% endfor %}
+                </span>
             </div>
         </div>
         <div class="row row-cols-4 g-3 product-list">

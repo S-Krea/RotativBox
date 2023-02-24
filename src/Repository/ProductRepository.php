@@ -39,6 +39,21 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllEnabled(?string $brandSlug)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->andWhere('p.enabled = :enabled')
+            ->setParameter('enabled', true)
+        ;
+
+        if ($brandSlug) {
+            $qb->leftJoin('p.brand', 'b')->andWhere('b.slug = :slug')
+                ->setParameter('slug', $brandSlug);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Product[] Returns an array of Product objects
 //     */

@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use Symfony\Component\Serializer\Annotation\SerializedName;
+
 class Product
 {
     private ?int $id = null;
@@ -16,6 +18,10 @@ class Product
     private array $images = [];
 
     private string $permalink;
+
+    /** @var Brand[] $marques */
+    #[SerializedName('marque')]
+    private array $marques;
 
     /**
      * @return int|null
@@ -163,6 +169,24 @@ class Product
     public function setPermalink(string $permalink): Product
     {
         $this->permalink = $permalink;
+        return $this;
+    }
+
+    /**
+     * @return Brand[]
+     */
+    public function getMarques(): array
+    {
+        return $this->marques;
+    }
+
+    /**
+     * @param Brand[] $marques
+     * @return Product
+     */
+    public function setMarques(array $marques): Product
+    {
+        $this->marques = $marques;
         return $this;
     }
 

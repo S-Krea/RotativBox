@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\Box;
+use App\Repository\BrandRepository;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,12 +14,19 @@ class ProductController extends AbstractController
 {
 
     #[Route(path: '/', name: "_list")]
-    public function listProducts(ProductRepository $productRepository, ?Box $box)
+    public function listProducts(Request $request, ProductRepository $productRepository, BrandRepository $brandRepository, ?Box $box)
     {
 
-        $products = $productRepository->findAll();
+        $brandSlug = $request->query->get('brand', false);
+        $products = $productRepository->findAllEnabled($brandSlug);
+        $brands = $brandRepository->findAllEnabled();
 
-        return $this->render('front/products/list.html.twig', ['products' => $products, 'box' => $box]);
+        return $this->render('front/products/list.html.twig', [
+            'products' => $products,
+            'brands' => $brands,
+            'box' => $box,
+            'filterSlug' => $brandSlug,
+        ]);
     }
 
 }
