@@ -160,6 +160,21 @@ $offersColor: (
       .row.bottom {
         align-self: end;
       }
+
+      .bullet-small{
+        font-size: 0.85rem;
+        margin-top: -5px;
+        padding: 0;
+        margin-bottom: 0;
+        margin-left: 53px;
+        font-style: italic;
+      }
+
+      #bullets-first{
+        #padder {
+          height: calc(398px - 295px);
+        }
+      }
     }
 
   }

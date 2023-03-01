@@ -26,7 +26,6 @@
                 <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
                     <a class="me-5 py-2 text-decoration-none active" href="#">Les boxs</a>
                     <a class="me-5 py-2 text-decoration-none" href="#">Le concept</a>
-                    <a class="me-5 py-2 text-decoration-none" href="{{ cimedentaire_url }}">Autres produits</a>
                     <a href="{{ path('app_cart_show') }}" class="btn bg-light-blue text-white">Ma box
                         ({{ (boxContent)? boxContent.items|length : '0' }})</a>
                 </nav>
@@ -63,9 +62,6 @@
                                 <li>
                                     <a href="#">Le concept</a>
                                 </li>
-                                <li>
-                                    <a href="">Autres produits</a>
-                                </li>
                             </ul>
                         </div>
                         <div class="col">
@@ -75,9 +71,6 @@
                                 </li>
                                 <li>
                                     <a href="">Politique de confidentialité</a>
-                                </li>
-                                <li>
-                                    &nbsp;
                                 </li>
                             </ul>
                         </div>
