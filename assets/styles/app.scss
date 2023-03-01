@@ -88,10 +88,21 @@ main {
 
 .product-list {
   margin-top: 50px;
+  padding-bottom: 100px;
 
   .product-card {
+
     .card-title {
       color: $lighterBlue;
+    }
+
+    .card-img-top{
+      width: 100%;
+      aspect-ratio: 278/185;
+    }
+
+    .card-text{
+      min-height: 200px;
     }
 
     color: $lightGray;

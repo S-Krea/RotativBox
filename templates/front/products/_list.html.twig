@@ -1,10 +1,14 @@
 {% for product in products %}
-    <div class="col product-card" >
-        <div class="card p-3">
-            <img src="{{ product.image }}" class="card-img-top rounded-3 mb-3" alt="{{ product.imageAlt }}">
+    <div class="d-flex col product-card align-items-stretch" >
+        <div class="card p-3 w-100">
+            {% set imageUrl = product.image %}
+            {% if imageUrl is null %}
+                {% set imageUrl = "https://placehold.co/400?text="~"Pas d'image produit"|url_encode %}
+            {% endif %}
+            <img src="{{ imageUrl }}" class="card-img-top rounded-3 mb-3" alt="{{ product.imageAlt }}">
             <div class="card-body">
                 <h5 class="card-title fw-bold">{{ product.name }}</h5>
-                <p class="card-text">{{ product.shortDescription|raw }}</p>
+                <div class="card-text">{{ product.shortDescription|raw }}</div>
                 {# <p class="fw-bold">Prix de vente : {{ product.price }} €</p> #}
                 <p>
                     <a href="{{ product.permalink }}" target="_blank" class="text-muted small">Plus d'infos</a>
