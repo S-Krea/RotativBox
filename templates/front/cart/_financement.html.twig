@@ -16,13 +16,13 @@
                 </p>
 
                 {% set totalCredit = result.firstPayment + (nbMensualite*result.monthlyPayment) %}
-                {#
-                <p class="small text-muted">
+                <p class="small text-muted d-none">
                     Coût Total : {{ result.total|round(2) }} € <br>
+                    Taux : {{ result.rate }} <br>
+                    Type : {{ result.type.value }} <br>
                     Total Credit : {{ totalCredit|round(2) }} € <br>
                     Coût du crédit : {{ (totalCredit - result.total)|round(2) }} €
                 </p>
-                #}
             </div>
             <div class="row">
                 {{ form_start(form, {'action':path('app_cart_validate')}) }}

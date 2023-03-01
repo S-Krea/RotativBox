@@ -31,16 +31,14 @@
         {% for product in box.items %}
             <tr>
                 <td>{{ product.name }}</td>
-                <td>{{ product.price|round(2) }} €</td>
             </tr>
         {% endfor %}
-        </tbody>
-        <tfooter>
+        {% if box.optionDAC %}
             <tr>
-                <th>Total</th>
-                <th colspan="2">{{ box.productTotal|round(2) }}€</th>
+                <td>Option DAC Universal S pour l'entretien de mes instruments rotatifs</td>
             </tr>
-        </tfooter>
+        {% endif %}
+        </tbody>
     </table>
 </div>
 <div id="financement">

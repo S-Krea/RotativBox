@@ -19,7 +19,7 @@ class ImportRateController extends AbstractController
     public function importRate(Request $request, PriceRateRepository $rateRepository, PriceRateImporter $priceRateImporter)
     {
         $templateFile = "/import/template/modele_taux.csv";
-        $currentRates = $rateRepository->findBy([],['months'=>'asc']);
+        $currentRates = $rateRepository->findBy([],['months'=>'asc', 'financingMode' => 'asc']);
 
         $currentRates = $this->formatToArray($currentRates);
 

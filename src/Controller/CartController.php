@@ -69,9 +69,12 @@ class CartController extends AbstractController
 
         $nbMois = $params->nbMois ?? 36;
         $typeFinance = $params->financement ?? 'linear';
+        $optionDac = ($params->optionDAC === 'on');
 
         try {
+            $box->setOptionDAC($optionDac);
             $result = $calculator->calculate($box, $nbMois, $typeFinance);
+            $request->getSession()->set(Box::BOX_SESSION_KEY, $box);
         } catch (PriceRateNotFoundException $e) {
             return new Json([
                 'html' => 'Une erreur est intervenue : '.$e->getMessage(),

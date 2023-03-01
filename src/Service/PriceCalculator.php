@@ -35,6 +35,13 @@ class PriceCalculator
 
         $mensualite = $total * $financingRate;
 
+        /*
+         * TODO: Gérer l'option ici
+        if ($box->hasOptionDAC()) {
+            $mensualite += $box->getOptionDacMonthlyPrice();
+        }
+        */
+
         return [
             'nbMois' => $nbMois,
             'type' => $financingMode,

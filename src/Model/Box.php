@@ -16,6 +16,8 @@ class Box
 
     protected Customer $user;
 
+    protected bool $optionDAC = false;
+
     public function __construct($maxItems = 3)
     {
         $this->maxItems = $maxItems;
@@ -149,5 +151,35 @@ class Box
     public function contains($product)
     {
         return $this->items->containsKey($product->getId());
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasOptionDAC(): bool
+    {
+        return $this->optionDAC;
+    }
+
+    /**
+     * @param bool $optionDAC
+     */
+    public function setOptionDAC(bool $optionDAC): void
+    {
+        $this->optionDAC = $optionDAC;
+    }
+
+    public function getOptionDacMonthlyPrice()
+    {
+        return 150;
+    }
+
+    public function getMaxMonthsPossible()
+    {
+        return match($this->maxItems){
+            3 => 36,
+            6 => 48,
+            9 => 60,
+        };
     }
 }

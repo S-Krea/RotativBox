@@ -1,0 +1,104 @@
+
+//Codepen
+.rangeWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.values{
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  color: $darkBlue;
+  /*span:first-child{
+    margin-left: 10px;
+  }*/
+}
+.range {
+  width: 100%;
+}
+.form-range {
+  width: 100%;
+  -webkit-appearance: none;
+  &:focus {
+    outline: none;
+  }
+  &::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    box-shadow: none;
+    background: $darkBlue;
+    border-radius: 3px;
+    border: 0px solid #010101;
+  }
+  &::-moz-range-track{
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    box-shadow: none;
+    background: $darkBlue;
+    border-radius: 1px;
+    border: 0px solid #010101;
+  }
+
+  &::-webkit-slider-thumb{
+    box-shadow: none;
+    border: 0px solid #ffffff;
+    box-shadow: 0px 10px 10px rgba(0,0,0,0.25);
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    /*background: $lighterBlue;*/
+    background-image: url('../static/images/logo-rotativ-box-couleur.png');
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -8px;
+  }
+  &::-moz-range-thumb{
+    box-shadow: none;
+    border: 0px solid #ffffff;
+    box-shadow: 0px 10px 10px rgba(0,0,0,0.25);
+    height: 42px;
+    width: 22px;
+    border-radius: 22px;
+    /*background: $lighterBlue;*/
+    background-image: url('../static/images/logo-rotativ-box-blanc.png');
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -20px;
+  }
+  &::-moz-focus-outer {
+    border: 0;
+  }
+}
+.value {
+  position: relative;
+  transform-origin: center center;
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin-left: -20px;
+  background: transparent;
+  border-radius: 50%;
+  line-height: 46px;
+  text-align: center;
+  font-weight: bold;
+  border: 2px solid $darkBlue;
+  color: $darkBlue;
+  font-style: normal;
+  font-size: 20px;
+  margin-bottom: 10px;
+/*
+  &::after {
+    content: "mois";
+    display: block;
+    font-size: 14px;
+    letter-spacing: 0.07em;
+    margin-top: -2px;
+  }
+ */
+}

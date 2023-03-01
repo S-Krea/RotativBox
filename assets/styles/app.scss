@@ -17,6 +17,7 @@ $theme-colors: map-merge($theme-colors, $customColors);
 @import '~bootstrap/scss/bootstrap';
 @import '~bootstrap-icons/font/bootstrap-icons.scss';
 @import "./loader";
+@import "./range_slider";
 
 body {
   color: $primary;
@@ -239,18 +240,6 @@ $offersColor: (
       max-width: 100px;
       padding: 10px;
       border-radius: 10px;
-    }
-  }
-}
-
-.rangeWrapper {
-  .values {
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-
-    .value {
-      position: absolute;
     }
   }
 }
