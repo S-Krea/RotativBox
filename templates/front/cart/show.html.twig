@@ -65,7 +65,7 @@
                                     <label class="form-check-label" for="flexSwitchCheckDefault">
                                         Option DAC Universal S pour l'entretien de mes instruments rotatifs
                                     </label>
-                                    <p class="form-text">(+ {{ box.optionDacMonthlyPrice }}€ TTC / Mois)</p>
+                                    {# <p class="form-text">(+ {{ box.optionDacMonthlyPrice }}€ TTC / Mois)</p> #}
                                 </div>
                             </div>
                         </div>
@@ -75,9 +75,9 @@
                 <div class="row mt-4">
                     <div class="col bg-light rounded-3 py-4 px-4">
                         <form action="{{ path('app_cart_calculate') }}" method="post" id="calculator">
-                            <h3 class="text-dark-blue pb-3">Conditions de financement</h3>
+                            <h3 class="text-dark-blue pb-3">Personnaliser mes conditions</h3>
                             <h5 class="text-dark-blue pb-3">Nombre de mois</h5>
-                            <p class="small">Faites glisser le curseur pour choisir la durée de financement.</p>
+                            <p class="small">Faites glisser le curseur pour choisir la durée de location.</p>
                             <div class="rangeWrapper">
                                 <div class="range">
                                     <span class="value"></span>
@@ -94,11 +94,11 @@
                                 </div>
                             </div>
 
-                            <h5 class="text-dark-blue pt-5 mt-3 pb-3">Votre apport :</h5>
+                            <h5 class="text-dark-blue pt-5 mt-3 pb-3">Premier loyer majoré :</h5>
                             <div class="apport">
                                 <input type="radio" class="btn-check" name="params[financement]" id="option1"
                                        autocomplete="off" checked value="linear">
-                                <label class="btn btn-outline-dark-blue" for="option1">Pas d'apport</label>
+                                <label class="btn btn-outline-dark-blue" for="option1">Linéaire</label>
 
                                 <input type="radio" class="btn-check" name="params[financement]" id="option2"
                                        autocomplete="off" value="f1">
