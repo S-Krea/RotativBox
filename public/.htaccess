@@ -23,7 +23,7 @@ DirectoryIndex index.php
     Options +FollowSymlinks
 
     RewriteEngine On
-    
+
     RewriteCond %{HTTPS} off
     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 

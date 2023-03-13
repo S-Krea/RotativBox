@@ -24,8 +24,10 @@
                     <img src="{{ asset('build/static/images/logo-rotativ-box-couleur.png') }}" alt="Rotativ'Box">
                 </a>
                 <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-                    <a class="me-5 py-2 text-decoration-none active" href="#">Les boxs</a>
-                    <a class="me-5 py-2 text-decoration-none" href="#">Le concept</a>
+                    <a class="me-5 py-2 text-decoration-none active" href="{{ path('app_home') }}">Les boxs</a>
+                    {#
+                        <a class="me-5 py-2 text-decoration-none" href="{{ path('app_concept') }}">Le concept</a>
+                    #}
                     <a href="{{ path('app_cart_show') }}" class="btn bg-light-blue text-white">Ma box
                         ({{ (boxContent)? boxContent.items|length : '0' }})</a>
                 </nav>
@@ -59,9 +61,11 @@
                                 <li>
                                     <a href="{{ path('app_home') }}">Les boxs</a>
                                 </li>
+                                {#
                                 <li>
-                                    <a href="#">Le concept</a>
+                                    <a href="{{ path('app_concept') }}">Le concept</a>
                                 </li>
+                                #}
                             </ul>
                         </div>
                         <div class="col">
@@ -70,7 +74,7 @@
                                     <a href="">Mentions légales</a>
                                 </li>
                                 <li>
-                                    <a href="">Politique de confidentialité</a>
+                                    <a href="{{ path('app_confidentialite') }}">Politique de confidentialité</a>
                                 </li>
                             </ul>
                         </div>
