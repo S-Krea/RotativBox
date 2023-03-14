@@ -21,7 +21,7 @@ class ProductFetcher
 
         $options = array_merge_recursive(['query' => [
             'per_page' => '50',
-            'tag' => '93',
+            'tag' => '121',
         ]], $options);
         $response = $this->woocommerceApi->request('GET', $url, $options);
         $nextLink = $this->findNext($response->getHeaders());
