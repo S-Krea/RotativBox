@@ -98,9 +98,15 @@ main {
       color: $lighterBlue;
     }
 
-    .card-img-top{
+    .img-wrapper{
+      max-height: 290px;
+      overflow: hidden;
+      aspect-ratio: 1;
       width: 100%;
-      aspect-ratio: 278/185;
+      background-position: center center;
+      background-repeat: no-repeat;
+      -webkit-background-size: contain;
+      background-size: contain;
     }
 
     .card-text{
