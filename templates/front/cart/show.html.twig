@@ -29,10 +29,10 @@
                     <div class="table-responsive">
                         <table class="table align-middle">
                             <tbody>
-                            {% for product in box.items %}
+                            {% for product in box.cartRows %}
                                 <tr>
                                     <td><img class="rounded-3 product-thumb img-thumbnail" src="{{ product.image }}" alt=""></td>
-                                    <td>{{ product.name }}</td>
+                                    <td>{{ product.qte }} x {{ product.name }}</td>
                                     {#
                                     <td>{{ product.price|round(2) }} €</td>
                                     #}

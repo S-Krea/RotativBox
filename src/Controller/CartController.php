@@ -8,6 +8,7 @@ use App\Exception\ItemAlreadyInBoxException;
 use App\Exception\PriceRateNotFoundException;
 use App\Form\DevisForm;
 use App\Model\Box;
+use App\Repository\ProductRepository;
 use App\Service\Mailer;
 use App\Service\PriceCalculator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -51,8 +52,12 @@ class CartController extends AbstractController
     }
 
     #[Route(path: '/cart', name: 'cart_show')]
-    public function showCart(Request $request, ?Box $box = null)
+    public function showCart(Request $request, ProductRepository $productRepository, ?Box $box = null)
     {
+
+        //Récup des box depuis la queryString, si présent on écrase la box en cours.
+        $box = $this->getPacksParams($request, $productRepository, $box);
+
         if (!$box) {
             $this->addFlash('warning', 'Vous n\'avez pas encore sélectionné de box.');
 
@@ -106,5 +111,35 @@ class CartController extends AbstractController
         }
 
         return $this->redirectToRoute('app_home');
+    }
+
+    private function getPacksParams(Request $request, ProductRepository $productRepository, ?Box $box): ?Box
+    {
+        $prods = [];
+        for ($i=1;$i<=9;$i++) {
+            $prods[] = $request->query->get('p'.$i, null);
+        }
+
+        $prods = array_filter($prods);
+        $nbProds = count($prods);
+
+        if ($nbProds === 0) {
+            return $box;
+        }
+
+        if (!in_array($nbProds, [3,6,9])) {
+            return $box;
+        }
+
+        $box = new Box($nbProds);
+        foreach ($prods as $prod) {
+            $product = $productRepository->findOneBy(['woocommerceId' => $prod]);
+            if ($product) {
+                $box->addItem($product);
+            }
+        }
+
+        $request->getSession()->set(Box::BOX_SESSION_KEY, $box);
+        return $box;
     }
 }

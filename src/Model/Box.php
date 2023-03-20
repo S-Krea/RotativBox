@@ -80,23 +80,33 @@ class Box
 
     public function addItem($product)
     {
-        if  ($this->isFull()) {
+        if ($this->isFull()) {
             throw new BoxFullException();
         }
 
+        /** finalement on doit gérer les quantité dans la box
+         * Donc on a plus besoin de cette vérif
+         */
+        /*
         if  ($this->items->containsKey($product->getId())) {
             throw new ItemAlreadyInBoxException();
         }
+        */
 
-        $this->items->set($product->getId(), $product);
+        $this->items->add($product);
 
         return $this;
     }
 
-    public function removeItem($product)
+    public function removeItem($product, $all = false)
     {
-        if ($this->items->containsKey($product->getId())) {
-            $this->items->remove($product->getId());
+        foreach ($this->items as $item) {
+            if ($item->getId() === $product->getId()) {
+                $this->items->removeElement($item);
+                if (!$all) {
+                    break;
+                }
+            }
         }
 
         return $this;
@@ -111,7 +121,7 @@ class Box
     {
         $total = 0;
         foreach ($this->items as $item) {
-            $total+= (float)$item->getPrice();
+            $total += (float)$item->getPrice();
         }
 
         return $total;
@@ -136,7 +146,7 @@ class Box
 
     public function getLabel()
     {
-        return match($this->maxItems){
+        return match ($this->maxItems) {
             3 => "First",
             6 => 'Expert',
             9 => 'Master',
@@ -176,10 +186,33 @@ class Box
 
     public function getMaxMonthsPossible()
     {
-        return match($this->maxItems){
+        return match ($this->maxItems) {
             3 => 36,
             6 => 48,
             9 => 60,
         };
+    }
+
+    public function getCartRows()
+    {
+        $rows = [];
+
+        foreach ($this->items as $product) {
+            $prodId = $product->getId();
+
+            if (isset($rows[$prodId])) {
+                $rows[$prodId]['qte'] += 1;
+                continue;
+            }
+
+            $rows[$product->getId()] = [
+                'id' => $prodId,
+                'name' => $product->getName(),
+                'image' => $product->getImage(),
+                'qte' => 1,
+            ];
+        }
+
+        return $rows;
     }
 }
