@@ -26,10 +26,10 @@
             <div class="container-fluid container-lg">
                 <div class="row">
                     <div class="col">
-                        Il vous reste <b>{{ box.remainings }} sur {{ box.maxItems }}</b> produits à ajouter à votre box
+                        Il vous reste <b><span class="cart-remainings">{{ box.remainings }}</span> sur {{ box.maxItems }}</b> produits à ajouter à votre box
                     </div>
                     <div class="col d-flex justify-content-end">
-                        <a href="{{ path('app_cart_show') }}" class="btn bg-light-blue text-white">Voir ma box ({{ (boxContent)? boxContent.items|length : '0' }})</a>
+                        <a href="{{ path('app_cart_show') }}" class="btn bg-light-blue text-white">Voir ma box (<span class="cart-count">{{ (boxContent)? boxContent.items|length : '0' }}</span>)</a>
                     </div>
                 </div>
             </div>
@@ -70,6 +70,6 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {{ encore_entry_script_tags('products') }}
+    {{ encore_entry_script_tags('cart') }}
 {% endblock %}
 

@@ -14,13 +14,14 @@ use App\Service\PriceCalculator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Json;
 
 class CartController extends AbstractController
 {
-    #[Route(path: '/box/add/{id}', name: 'cart_add')]
-    public function addProduct(Request $request, Product $product, ?Box $box = null)
+    #[Route(path: '/bo_x/add/{id}', name: 'old_cart_add')]
+    public function oldAddProduct(Request $request, Product $product, ?Box $box = null)
     {
         if (!$box) {
             $this->addFlash('danger', 'Veuillez sélectionner une box pour commencer.');
@@ -39,6 +40,44 @@ class CartController extends AbstractController
         }
 
         return $this->redirectToRoute('app_box_chose', ['type' => $box->getMaxItems()]);
+    }
+
+    #[Route(path: '/box/add/{id}', name: 'cart_add')]
+    public function addProduct(Request $request, Product $product, ?Box $box = null)
+    {
+        if (!$box) {
+            return new JsonResponse(['status' => 'danger', 'message' => 'Veuillez sélectionner une box pour commencer.'], Response::HTTP_NOT_ACCEPTABLE);
+        }
+
+        try {
+            $box->addItem($product);
+            $request->getSession()->set(Box::BOX_SESSION_KEY, $box);
+            $data = [
+                'status' => 'success',
+                'nbItems' => $box->getItems()->count(),
+                'remainings' => $box->getMaxItems() - $box->getItems()->count(),
+                'message' => 'Produit ajouté à la box',
+            ];
+            $returnStatus = 201;
+        } catch (BoxFullException $boxFullException) {
+            $data = [
+                'status' => 'warning',
+                'nbItems' => $box->getItems()->count(),
+                'remainings' => $box->getMaxItems() - $box->getItems()->count(),
+                'message' => $boxFullException->getMessage(),
+            ];
+            $returnStatus = 400;
+        } catch (ItemAlreadyInBoxException $alreadyInBoxException) {
+            $data = [
+                'status' => 'warning',
+                'nbItems' => $box->getItems()->count(),
+                'remainings' => $box->getMaxItems() - $box->getItems()->count(),
+                'message' => $alreadyInBoxException->getMessage(),
+            ];
+            $returnStatus = 400;
+        }
+
+        return new JsonResponse($data, $returnStatus);
     }
 
 

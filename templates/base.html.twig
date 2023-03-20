@@ -29,7 +29,7 @@
                         <a class="me-5 py-2 text-decoration-none" href="{{ path('app_concept') }}">Le concept</a>
                     #}
                     <a href="{{ path('app_cart_show') }}" class="btn bg-light-blue text-white">Ma box
-                        ({{ (boxContent)? boxContent.items|length : '0' }})</a>
+                        (<span class="cart-count">{{ (boxContent)? boxContent.items|length : '0' }}</span>)</a>
                 </nav>
             </div>
         </header>

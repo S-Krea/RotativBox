@@ -16,6 +16,10 @@ class ProductController extends AbstractController
     #[Route(path: '/', name: "_list")]
     public function listProducts(Request $request, ProductRepository $productRepository, BrandRepository $brandRepository, ?Box $box)
     {
+        if (!$box) {
+            $this->addFlash('warning', 'Selectionnez d\'abord une box');
+            return $this->redirectToRoute('app_home');
+        }
 
         $brandSlug = $request->query->get('brand', false);
         $products = $productRepository->findAllEnabled($brandSlug);

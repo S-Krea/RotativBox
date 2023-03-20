@@ -17,7 +17,7 @@
                 {% if box.contains(product) %}
                     {% set disabled='disabled' %}
                 {% endif %}
-                <a href="{{ path('app_cart_add', {'id': product.id}) }}" class="btn bg-dark-blue text-white {{ disabled }}">Ajouter à ma box</a>
+                <a href="{{ path('app_cart_add', {'id': product.id}) }}" class="btn bg-dark-blue text-white {{ disabled }}" add-to-cart>Ajouter à ma box</a>
             </div>
         </div>
     </div>
