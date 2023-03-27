@@ -181,7 +181,11 @@ class Box
 
     public function getOptionDacMonthlyPrice()
     {
-        return 150;
+        return match ($this->maxItems) {
+            3 => 0,
+            6 => 160,
+            9 => 130,
+        };
     }
 
     public function getMaxMonthsPossible()
