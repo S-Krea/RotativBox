@@ -30,17 +30,19 @@ class PriceCalculator
 
         $total = $box->getProductTotal();
         $total += $box->getMaintenanceCost();
-        $firstPayment = $financingMode->firstPaymentRate() * $total;
-        $financingRate = (float)$priceRate->getRate();
-
-        $mensualite = $total * $financingRate;
 
         /*
          * TODO: Gérer l'option ici
          * */
         if ($box->hasOptionDAC()) {
-            $mensualite += $box->getOptionDacMonthlyPrice();
+            $total += $box->getOptionDacPrice();
         }
+
+
+        $firstPayment = $financingMode->firstPaymentRate() * $total;
+        $financingRate = (float)$priceRate->getRate();
+
+        $mensualite = $total * $financingRate;
         
 
         return [

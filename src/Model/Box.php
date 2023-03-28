@@ -219,4 +219,13 @@ class Box
 
         return $rows;
     }
+
+    public function getOptionDacPrice()
+    {
+        return match ($this->maxItems) {
+            3 => 0,
+            6 => 7200,
+            9 => 7200,
+        };
+    }
 }
