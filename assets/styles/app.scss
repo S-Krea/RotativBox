@@ -18,6 +18,7 @@ $theme-colors: map-merge($theme-colors, $customColors);
 @import '~bootstrap-icons/font/bootstrap-icons.scss';
 @import "./loader";
 @import "./range_slider";
+@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap');
 
 body {
   color: $primary;
@@ -117,6 +118,10 @@ main {
   }
 }
 
+.ft-cursive{
+  font-family: 'Homemade Apple', cursive;
+}
+
 $offersColor: (
         first: #F0C1A3,
         expert: #E38E8B,
@@ -142,6 +147,10 @@ $offersColor: (
     display: inline-block;
     text-align: center;
     margin-right: 4px;
+  }
+
+  .ft-cursive{
+    color: map-get($offersColor, $type);
   }
 }
 
@@ -191,7 +200,7 @@ $offersColor: (
 
       #bullets-first{
         #padder {
-          height: calc(398px - 295px);
+          height: calc(416px - 295px);
         }
       }
     }
