@@ -4,7 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-    woocommerce_url: "https://cime.estnotremeilleurclient.fr/wp-json/wc/v3/"
+    woocommerce_url: "https://cimedentaire.com/wp-json/wc/v3/"
     mail_to_devis: 'devis@cimedentaire.fr'
 
 services:

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\PriceRate;
 use App\Repository\PriceRateRepository;
 use App\Service\PriceRateImporter;
+use App\Service\ProductSynchronizer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,6 +41,15 @@ class ImportRateController extends AbstractController
             'form' => $form,
             'rates' => $currentRates,
         ]);
+    }
+
+    #[Route(path: '/sync', name: 'sync_product')]
+    public function importProducts(Request $request, ProductSynchronizer $productSynchronizer)
+    {
+        $productSynchronizer->synchronizeAll();
+        $this->addFlash('success', 'Synchronisation produit effectuée');
+
+        return $this->redirectToRoute('app_admin_import_rate');
     }
 
     /**

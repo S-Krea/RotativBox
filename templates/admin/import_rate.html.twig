@@ -47,4 +47,10 @@
             {{ form_end(form) }}
         </div>
     </div>
+    <div class="row mt-5">
+        <div class="col">
+            <h2>Synchroniser les produits</h2>
+            <a href="{{ path('app_admin_import_sync_product') }}" class="btn btn-info text-white">Synchroniser la base produit depuis WooCommerce</a>
+        </div>
+    </div>
 {% endblock %}

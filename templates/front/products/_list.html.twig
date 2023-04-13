@@ -6,7 +6,7 @@
                 {% set imageUrl = "https://placehold.co/400?text="~"Pas d'image produit"|url_encode %}
             {% endif %}
             <div class="img-wrapper card-img-top rounded-3 mb-3" style="background-image: url({{ imageUrl }})"></div>
-            <div class="card-body">
+            <div class="card-body d-flex flex-column justify-content-between">
                 <h5 class="card-title fw-bold">{{ product.name }}</h5>
                 <div class="card-text">{{ product.shortDescription|raw }}</div>
                 {# <p class="fw-bold">Prix de vente : {{ product.price }} €</p> #}
