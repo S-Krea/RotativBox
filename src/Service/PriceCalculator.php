@@ -6,18 +6,22 @@ use App\Exception\PriceRateNotFoundException;
 use App\Model\Box;
 use App\Model\FinancingMode;
 use App\Repository\PriceRateRepository;
+use App\Repository\SettingsRepository;
 
 class PriceCalculator
 {
     private PriceRateRepository $priceRateRepository;
+    private SettingsRepository $settingsRepository;
 
-    public function __construct(PriceRateRepository $priceRateRepository)
+    public function __construct(PriceRateRepository $priceRateRepository, SettingsRepository $settingsRepository)
     {
         $this->priceRateRepository = $priceRateRepository;
+        $this->settingsRepository = $settingsRepository;
     }
 
     public function calculate(Box $box, $nbMois, $typeFinancement)
     {
+        $settings = $this->settingsRepository->findOneBy([]);
         $financingMode = FinancingMode::from($typeFinancement);
         $priceRate = $this->priceRateRepository->findOneBy([
             'months' => $nbMois,
@@ -29,13 +33,11 @@ class PriceCalculator
         }
 
         $total = $box->getProductTotal();
-        $total += $box->getMaintenanceCost();
+        $total += $box->getMaintenanceCost($settings->getMaintenanceCost());
 
-        /*
-         * TODO: Gérer l'option ici
-         * */
+
         if ($box->hasOptionDAC()) {
-            $total += $box->getOptionDacPrice();
+            $total += $box->getOptionDacPrice($settings->getDacOptionPrice());
         }
 
 

@@ -127,10 +127,12 @@ class Box
         return $total;
     }
 
-    public function getMaintenanceCost()
+    public function getMaintenanceCost($maintenancePrice = null)
     {
         $coeff = 1;
-        $maintenancePrice = 350;
+        if ($maintenancePrice === null) {
+            $maintenancePrice = 350;
+        }
 
         switch ($this->maxItems) {
             case 6:
@@ -220,12 +222,16 @@ class Box
         return $rows;
     }
 
-    public function getOptionDacPrice()
+    public function getOptionDacPrice($amount = null)
     {
+        if ($amount === null) {
+            $amount = 7200;
+        }
+
         return match ($this->maxItems) {
             3 => 0,
-            6 => 7200,
-            9 => 7200,
+            6 => $amount,
+            9 => $amount,
         };
     }
 }
